@@ -1,0 +1,66 @@
+.color1 {
+	background-color: #B82601;
+}
+.card {
+	margin:auto;
+	margin-bottom: 20px;
+	width: 80%;
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.center {
+    margin: auto;
+    width: 80%;
+}
+'
+.film-desc {
+	padding-top: 10px;
+	padding-bottom:10px;
+}
+
+.img {
+	width:200px;
+	height:300px;
+}
+.padding {
+	padding-right: 15px;
+	padding-left: 10px;
+}
+
+.headMargin {
+	margin-bottom: 20px;
+}
+
+
+.container {
+    position: relative;
+    background-color: white;
+}
+
+.topleft {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 30px;
+    font-family: arial;
+    letter-spacing: -1px;
+}
+
+.logo { 
+    width: 100%;
+    height: auto;
+    display: block;
+    padding-left: 190px;
+}
+
+body {
+    background-image: url("http://localhost:8080/CyberFlix_NRA/images/background.jpg");
+    background-attachment: fixed;
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+h3 {
+	font-weight: bold;
+	margin-bottom: 20px;
+}
