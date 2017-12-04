@@ -44,11 +44,8 @@ public class CyberFlixServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List <Film> foundFilms = DataSource.findFilmByTitle(request.getParameter("film_title"));
-		
-		List<Film> newFilms = DataSource.findNewestFilms(5);
-		request.setAttribute("newFilms", newFilms);
-		
-		 // pass the path of the detail servlet that will be encoded in the hyperlink for
+		 
+		// pass the path of the detail servlet that will be encoded in the hyperlink for
 		// associated with the film’s title
 		request.setAttribute("detailServlet",   
 		   "http://localhost:8080/CyberFlix_NRA/CyberFlixMovieDetailServlet");
