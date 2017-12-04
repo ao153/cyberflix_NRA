@@ -2,6 +2,9 @@ package edu.txstate.internet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -34,15 +37,21 @@ public class CyberFlixMovieDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String image = request.getParameter("source");
-		String filmTitle = request.getParameter("film_title");
+		List<String> parameterNames = new ArrayList<String>(request.getParameterMap().keySet());
+		HashMap<String, String> myHash = new HashMap<>();
+		for (String param : parameterNames) {
+			String key = param;
+			String value = request.getParameter(param);
+			System.out.println(key + ": " + value);
+			myHash.put(key, value);
+		}
+
+		String image = myHash.get("source");
+		String filmTitle = myHash.get("film_title");
 		Film myFilm = DataSource.findFilmByTitle(filmTitle).get(0);
 		Film filmDetail = DataSource.getFilmDetail(myFilm); 
 		
-		// debugging film detail
-		System.out.println(filmDetail);
-		
-		// pass the list of films that matched the search query
+		// pass the film that matched the search query
 		request.setAttribute("film", filmDetail);
 		request.setAttribute("image", image);
 		

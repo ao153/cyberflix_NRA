@@ -23,27 +23,40 @@
 			 src="<c:url value="${image}"/>"
 			 alt="${film.title}"
 		>
-		</div>
+		<a id="addCart" style="color: red; margin-left: 25%;" href="#" onclick="myFunction()">ADD TO CART</a>
+		<script>
+		function myFunction() {
+		    alert(document.getElementById("addCart").innerHTML);
+		    $.ajax({
+		        type : 'POST',
+		        url : 'addCartServlet?addFilm=${film.title}',
+		        	type: "json",
+		        success : function(){alert("success")},
+		        error : function(){alert("error")}
+		 });
+		}
+		</script>
+	</div>
 	<div class = "w3-cell w3-cell-top padding">
-	<h3><c:out value="${film.getTitle()}"/></h3>
-	<p><b>Category: </b><c:out value="${film.getCategory()}"/></p>
-	<p><b>Year: </b><c:out value="${film.getReleaseYear()}"/></p>
-	<p><b>Rating: </b><c:out value="${film.getRating()}"/></p>
-	<p><b>Running Time: </b><c:out value="${film.getLength()}"/></p>
-	<p><c:out value= "${film.getDescription()}"/></p>
-	<hr>
-	<b>Actors: </b>
-	<c:if test="${empty film.getActors()}">
-    <i> No Actors Found For This Film. </i>
-	</c:if>
-	<c:forEach var = "film" items = "${film.getActors()}" varStatus = "loop">
-	<c:out value = "${film.getFirstName()} ${film.getLastName()}"/>
-	<c:if test="${!loop.last}">,</c:if>
-	</c:forEach>
-	<p> </p>
-	<p> </p>
+		<h3><c:out value="${film.getTitle()}"/></h3>
+		<p><b>Category: </b><c:out value="${film.getCategory()}"/></p>
+		<p><b>Year: </b><c:out value="${film.getReleaseYear()}"/></p>
+		<p><b>Rating: </b><c:out value="${film.getRating()}"/></p>
+		<p><b>Running Time: </b><c:out value="${film.getLength()}"/></p>
+		<p><c:out value= "${film.getDescription()}"/></p>
+		<hr>
+		<b>Actors: </b>
+		<c:if test="${empty film.getActors()}">
+	    <i> No Actors Found For This Film. </i>
+		</c:if>
+		<c:forEach var = "film" items = "${film.getActors()}" varStatus = "loop">
+		<c:out value = "${film.getFirstName()} ${film.getLastName()}"/>
+		<c:if test="${!loop.last}">,</c:if>
+		</c:forEach>
+		<p> </p>
+		<p> </p>
 	</div>
-	</div>
+</div>
 </div>
 </div>
 </body>

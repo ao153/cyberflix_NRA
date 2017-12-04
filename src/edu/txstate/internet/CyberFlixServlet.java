@@ -78,13 +78,12 @@ public class CyberFlixServlet extends HttpServlet {
 			
 			// we can add something that detects if all fields are blank to avoid a blank/weird SQL query..
 			// probably low on the priority list compared to some other stuff
+			// most easily done with javascript in a <script> tag on the page itself7
 		}
 		
 		// HERE IS THE CART CODE 
 		HttpSession session = request.getSession();
 		session.setAttribute("cartFilms", foundFilms);
-		
-		
 		
 		// pass the path of the detail servlet that will be encoded in the hyperlink for
 		// associated with the film’s title
