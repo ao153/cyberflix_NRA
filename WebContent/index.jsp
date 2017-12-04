@@ -55,57 +55,5 @@
 	</form>
 	</div>
 	
-	<table style = "width:100%">
-	<% int i = 0; %>
-	<% String source = "http://localhost:8080/CyberFlix_NRA/images/" + i + ".jpeg"; %>
-    <% List <Film> newFilms = DataSource.findNewestFilms(5); %>
-    <tr>
-	<td> <a href="http://localhost:8080/CyberFlix_NRA/CyberFlixMovieDetailServlet?film_title=<%=newFilms.get(i).getTitle()%>&source=<%=source%>">
-		 <img class="w3-image w3-padding"
-			 src=<%=source%>
-			 alt=<%=newFilms.get(i).getTitle() %>>
-		 </a> 
-	</td> 
-	<% i++; %>
-	<% source = "http://localhost:8080/CyberFlix_NRA/images/" + i + ".jpeg"; %>
-	<td> <a href="http://localhost:8080/CyberFlix_NRA/CyberFlixMovieDetailServlet?film_title=<%=newFilms.get(i).getTitle()%>&source=<%=source%>">
-		 <img class="w3-image w3-padding"
-			 src=<%=source%>
-			 alt=<%=newFilms.get(i).getTitle() %>>
-		 </a> 
-	</td> 
-	<% i++; %>
-	<% source = "http://localhost:8080/CyberFlix_NRA/images/" + i + ".jpeg"; %>
-	<td> <a href="http://localhost:8080/CyberFlix_NRA/CyberFlixMovieDetailServlet?film_title=<%=newFilms.get(i).getTitle()%>&source=<%=source%>">
-		 <img class="w3-image w3-padding"
-			 src=<%=source%>
-			 alt=<%=newFilms.get(i).getTitle() %>>
-		 </a> 
-	</td> 
-	<% i++; %>
-	<% source = "http://localhost:8080/CyberFlix_NRA/images/" + i + ".jpeg"; %>
-	<td> <a href="http://localhost:8080/CyberFlix_NRA/CyberFlixMovieDetailServlet?film_title=<%=newFilms.get(i).getTitle()%>&source=<%=source%>">
-		 <img class="w3-image w3-padding"
-			 src=<%=source%>
-			 alt=<%=newFilms.get(i).getTitle() %>>
-		 </a> 
-	</td> 
-	<% i++; %>
-	<% source = "http://localhost:8080/CyberFlix_NRA/images/" + i + ".jpeg"; %>
-	<td> <a href="http://localhost:8080/CyberFlix_NRA/CyberFlixMovieDetailServlet?film_title=<%=newFilms.get(i).getTitle()%>&source=<%=source%>">
-		 <img class="w3-image w3-padding"
-			 src=<%=source%>
-			 alt=<%=newFilms.get(i).getTitle() %>>
-		 </a> 
-	</td> 
-	<tr> 
-	<td> <%= newFilms.get(0).getTitle() %> </td>
-	<td> <%= newFilms.get(1).getTitle() %> </td>
-	<td> <%= newFilms.get(2).getTitle() %> </td>
-	<td> <%= newFilms.get(3).getTitle() %> </td>
-	<td> <%= newFilms.get(4).getTitle() %> </td>
-    </tr>
-    </table>
-
 </body>
 </html>
