@@ -12,6 +12,7 @@
   <div class="w3-container w3-black w3-left-align padding">
   <h1>  Movie Details</h1>
   <p> Here is the movie you selected </p>
+  <a id="cartLink" href="CyberFlixCartServlet?cart=fakecart">CART</a>
   </div>
   <hr>
 <div class="w3-container">

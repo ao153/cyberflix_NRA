@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.txstate.internet.cyberflix.data.DataSource;
 import edu.txstate.internet.cyberflix.data.film.Film;
@@ -78,6 +79,11 @@ public class CyberFlixServlet extends HttpServlet {
 			// we can add something that detects if all fields are blank to avoid a blank/weird SQL query..
 			// probably low on the priority list compared to some other stuff
 		}
+		
+		// HERE IS THE CART CODE 
+		HttpSession session = request.getSession();
+		session.setAttribute("cartFilms", foundFilms);
+		
 		
 		
 		// pass the path of the detail servlet that will be encoded in the hyperlink for
