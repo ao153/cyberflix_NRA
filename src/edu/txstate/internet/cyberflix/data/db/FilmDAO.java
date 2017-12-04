@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import edu.txstate.internet.cyberflix.data.actor.Actor;
 import edu.txstate.internet.cyberflix.data.film.Film;
 import edu.txstate.internet.cyberflix.data.film.FilmCategory;
 import edu.txstate.internet.cyberflix.data.film.Film.FilmRating;
@@ -20,23 +21,15 @@ import edu.txstate.internet.cyberflix.data.helper.FilmFactory;
 public class FilmDAO extends DAO {
 	private final static Logger LOGGER = Logger.getLogger(FilmDAO.class.getName());
 
-	private static final int FILM_ID_COLUMN = 1;
-	private static final int FILM_TITLE_COLUMN = 2;
-	private static final int FILM_DESCRIPTION_COLUMN = 3;
-	private static final int FILM_LENGTH_COLUMN = 4;
-	private static final int FILM_RATING_COLUMN = 5;
-	private static final int FILM_RELEASE_YEAR = 6;
-
 	private static final String FILM_SELECT_STRING = "SELECT film.film_id, film.title, film.description,"
 			+ "film.length, film.rating, film.release_year ";
 
-	public static List<Film> findNewestFilms() {
+	public List<Film> findNewestFilms(int maxNew) {
 		String selectString = "SELECT film.film_id, film.title, film.description, film.length, film.rating, film.release_year "
-				+ "from film" + " order by release_year desc";
+				+ "from film" + " order by release_year desc" + " limit " + maxNew;
 		List<Film> films = null;
 		Connection dbConnection = null;
 		try {
-			System.out.println("HEY");
 			dbConnection = DAO.getDBConnection();
 			Statement statement = dbConnection.createStatement();
 			ResultSet results = statement.executeQuery(selectString);
@@ -47,9 +40,7 @@ public class FilmDAO extends DAO {
 			LOGGER.severe(e.toString());
 			closeQuietly(dbConnection);
 		}
-
 		return films;
-
 	}
 
 	public List<Film> findFilmsByAttributes(String title, String description, int length, FilmRating rating) {
@@ -68,6 +59,94 @@ public class FilmDAO extends DAO {
 			closeQuietly(dbConnection);
 		}
 		return films;
+	}
+	
+	public List<Film> findFilmsByCategory(FilmCategory category) {
+		final String CATEGORY_CLAUSES = "FROM film, film_category WHERE "
+				+ "film.film_id = film_category.film_id AND "
+				+ "film_category.category_id =";	
+		
+		StringBuilder stringBuilder = new StringBuilder(FILM_SELECT_STRING);
+		stringBuilder.append(CATEGORY_CLAUSES);
+		stringBuilder.append(category.ordinal());
+		String selectString = stringBuilder.toString();
+		List<Film> films = null;
+		Connection dbConnection = null;
+		try {
+			dbConnection = DAO.getDBConnection();
+			Statement statement = dbConnection.createStatement();
+			ResultSet results = statement.executeQuery(selectString);
+			films = buildResults(results);
+			dbConnection.close();
+		} catch (SQLException e) {
+			System.err.println("FilmDAO.findFilmsByCategory: " + e.toString());
+			LOGGER.severe(e.toString());
+			closeQuietly(dbConnection);
+		}
+		return films;
+	}
+	
+	public List<Film> findFilmsAlphabetically(String firstCharacter){
+        String alphabetString = "select film_id, title, description, release_year, "
+                + "length, rating  from film  where title like '";
+        
+        StringBuilder stringBuilder = new StringBuilder(alphabetString);
+        stringBuilder.append(firstCharacter);
+        stringBuilder.append("%';");
+        String selectString = stringBuilder.toString();
+        
+        List<Film> films = null;
+        Connection dbConnection = null;
+        try {
+            dbConnection = DAO.getDBConnection();
+            Statement statement = dbConnection.createStatement();
+            ResultSet results = statement.executeQuery(selectString);
+            films = buildResults(results);
+            dbConnection.close();
+        } catch (SQLException e) {
+            System.err.println("FilmDAO.findFilmsAlphabetically: " + e.toString());
+            LOGGER.severe(e.toString());
+            closeQuietly(dbConnection);
+        }
+        return films;
+    }
+	
+	public List<Actor> findActorsInFilm(Film film) {
+		return new ActorDAO().findActorsInFilm(film);
+	}
+	
+	public String getFilmCategory(Film film) {
+		final String categoryFilmID = ", film_category.category_id,"
+				+ " category.category_id, `name` FROM film, film_category, "
+				+ "category WHERE film.film_id = film_category.film_id AND "
+				+ "category.category_id = film_category.category_id AND "
+				+ "film_category.film_id = " + film.getFilmID();
+		StringBuilder stringBuilder = new StringBuilder(FILM_SELECT_STRING);
+		stringBuilder.append(categoryFilmID);
+		String selectString = stringBuilder.toString();
+		String category = null;
+		Connection dbConnection = null;
+		try {
+			dbConnection = DAO.getDBConnection();
+			Statement statement = dbConnection.createStatement();
+			ResultSet results = statement.executeQuery(selectString);
+			while (results.next()) {
+				category = results.getString("name");
+			}
+			dbConnection.close();
+		} catch (SQLException e) {
+			System.err.println("FilmDAO.getFilmCategory: " + e.toString());
+			LOGGER.severe(e.toString());
+			closeQuietly(dbConnection);
+		}
+		return category;
+	}
+	
+	public Film getFilmDetail(Film film) {
+		for (Actor actor : findActorsInFilm(film)) 
+			film.addActor(actor);
+		film.setCategory(getFilmCategory(film));
+		return film;
 	}
 
 	@Override
@@ -144,7 +223,7 @@ public class FilmDAO extends DAO {
 			numberWhereClauses++;
 		}
 		String selectString = stringBuilder.toString();
-		LOGGER.info(selectString);
+		// LOGGER.info(selectString); <-- uncomment to see query string
 		return selectString;
 	}
 
@@ -153,14 +232,14 @@ public class FilmDAO extends DAO {
 		FilmFactory filmFactory = new FilmFactory();
 		try {
 			while (results.next()) {
-				int idnum = results.getInt(FILM_ID_COLUMN);
+				int idnum = results.getInt("film_id");
 				String id = Integer.toString(idnum);
-				String filmTitle = results.getString(FILM_TITLE_COLUMN);
-				String filmDescription = results.getString(FILM_DESCRIPTION_COLUMN);
-				int filmLengthnum = results.getInt(FILM_LENGTH_COLUMN);
+				String filmTitle = results.getString("title");
+				String filmDescription = results.getString("description");
+				int filmLengthnum = results.getInt("length");
 				String filmLength = Integer.toString(filmLengthnum);
-				String filmRating = results.getString(FILM_RATING_COLUMN);
-				String release_year = results.getString(FILM_RELEASE_YEAR);
+				String filmRating = results.getString("rating");
+				String release_year = results.getString("release_year").substring(0, 4);
 				Film film = filmFactory.makeFilm(id, filmTitle, filmDescription, release_year, filmLength, filmRating);
 				films.add(film);
 			}

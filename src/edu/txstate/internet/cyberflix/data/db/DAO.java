@@ -19,7 +19,6 @@ public abstract class DAO {
 			Class.forName(DB_DRIVER).newInstance();
 			dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD); // DAOPassword.getPassword());
 			dbConnection.setAutoCommit(true);
-			System.out.println("CONNECTED");
 		} catch (ClassNotFoundException e) {
 			System.err.println(e.toString());
 		} catch (InstantiationException | IllegalAccessException e) {

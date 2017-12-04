@@ -1,33 +1,29 @@
 package edu.txstate.internet.cyberflix.data;
+
 import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
 
 import edu.txstate.internet.cyberflix.data.actor.Actor;
-import edu.txstate.internet.cyberflix.data.actor.ActorInventory;
+import edu.txstate.internet.cyberflix.data.customer.Customer;
+import edu.txstate.internet.cyberflix.data.db.CustomerDAO;
+import edu.txstate.internet.cyberflix.data.db.FilmDAO;
 import edu.txstate.internet.cyberflix.data.film.Film;
-import edu.txstate.internet.cyberflix.data.film.FilmCatalog;
-import edu.txstate.internet.cyberflix.data.helper.ActorReader;
-import edu.txstate.internet.cyberflix.data.helper.FilmActorBuilder;
-import edu.txstate.internet.cyberflix.data.helper.FilmActorReader;
-import edu.txstate.internet.cyberflix.data.helper.FilmReader;
-import edu.txstate.internet.cyberflix.data.strategy.SelectorStrategy;
-import edu.txstate.internet.cyberflix.data.strategy.StrategyFindFilmByDescription;
-import edu.txstate.internet.cyberflix.data.strategy.StrategyFindFilmByLength;
-import edu.txstate.internet.cyberflix.data.strategy.StrategyFindFilmByTitle;
-import edu.txstate.internet.cyberflix.utils.ServletUtils;
+import edu.txstate.internet.cyberflix.data.film.Film.FilmRating;
+import edu.txstate.internet.cyberflix.data.film.FilmCategory;
 
 public class DataSource {
-
+	/*
 	final static String FILM_FILE             = "films.csv";
 	final static String ACTORS_FILE           = "actors.csv";
 	final static String FILM_ACTORS_LINK_FILE = "film_actors.csv";
+	*/
 	
 	public static void init () {
+		/*
 		String realPath = ServletUtils.getProjectInputFilesPath();
 		FilmReader aReader = new FilmReader ();
 		List <Film> films   = aReader.readFilmFile(realPath, FILM_FILE);
         FilmCatalog filmInventory = FilmCatalog.getInstance();
-        filmInventory.addAll (films);
+        filmInventory.addAll(films);
         
 		ActorReader actorReader = new ActorReader ();
 		List <Actor> actors = actorReader.readActorFile(realPath, ACTORS_FILE);
@@ -39,14 +35,44 @@ public class DataSource {
 		
 		FilmActorBuilder builder = new FilmActorBuilder ();
 		builder.build(filmInventory, actorInventory, pairs);
+		*/
 	}
 	
-	public static List <Film>findFilmByTitle (String title) {
-		return findFilmByStrategy(new StrategyFindFilmByTitle(title));
+	public static List<Film> findFilmByTitle (String title) {
+		return new FilmDAO().findFilmsByAttributes(title, null, 0, null);
+		//return findFilmByStrategy(new StrategyFindFilmByTitle(title));
+	}
+
+	public static List<Film> findNewestFilms(int maxNew) {
+		return new FilmDAO().findNewestFilms(maxNew);
 	}
 	
-	private static List <Film> findFilmByStrategy (SelectorStrategy strategy) {
-		List <Film>foundFilms = FilmCatalog.getInstance().findFilmByStrategy(strategy);
-		return foundFilms;
+	public static List<Film> findFilmsByAttributes(
+			String title, String description, int length, FilmRating rating) {
+		return new FilmDAO().findFilmsByAttributes(title, description, length, rating);
+	}
+	
+	public static List<Film> findFilmsByCategory(FilmCategory category) {
+		return new FilmDAO().findFilmsByCategory(category);
+	}
+	
+	public static List<Film> findFilmsAlphabetically(String firstCharacter) {
+		return new FilmDAO().findFilmsAlphabetically(firstCharacter);
+	}
+	
+	public static Customer findCustomerByEmail(String emailAddress) {
+		return new CustomerDAO().findCustomerByEmail(emailAddress);
+	}
+	
+	public static List<Actor> findActorsInFilm(Film film) {
+		return new FilmDAO().findActorsInFilm(film);
+	}
+	
+	public static String getFilmCategory(Film film) {
+		return new FilmDAO().getFilmCategory(film);
+	}
+	
+	public static Film getFilmDetail(Film film) {
+		return new FilmDAO().getFilmDetail(film);
 	}
 }

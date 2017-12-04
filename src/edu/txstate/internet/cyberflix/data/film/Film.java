@@ -17,6 +17,7 @@ public class Film {
 	private int length;
 	private FilmRating rating;
 	private List <Actor> actors;
+	private String category;
 
 	public Film(int filmID, String title, String description,
 			String releaseYear, int length, FilmRating rating) {
@@ -61,7 +62,15 @@ public class Film {
 	public String getTitle() {
 		return title;
 	}
+	
+	public String getCategory() {
+		return category;
+	}
 
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -86,6 +95,6 @@ public class Film {
 	public String toString() {
 		return "Film [filmID=" + filmID + ", title=" + title + ", description="
 				+ description + ", releaseYear=" + releaseYear + ", length="
-				+ length + ", rating=" + rating + "]";
+				+ length + ", rating=" + rating + ", category=" + category + ", actors=" + actors +"]";
 	}
 }

@@ -2,6 +2,7 @@
 <%@ page import="java.sql.*, java.util.*" %>
 <%@ page import = "edu.txstate.internet.cyberflix.data.db.FilmDAO" %>
 <%@ page import = "edu.txstate.internet.cyberflix.data.film.Film" %>
+<%@ page import = "edu.txstate.internet.cyberflix.data.DataSource" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
@@ -53,12 +54,12 @@
   	<button class="w3-button w3-block w3-light-grey w3-right-align" type = "submit" value = "Submit">Submit</button>
 	</form>
 	
-	<% List<Film> newFilms = edu.txstate.internet.cyberflix.data.db.FilmDAO.findNewestFilms();
-		for(int i = 0; i < 8; i++) {
-		   System.out.println(newFilms.get(i).getTitle() + "\n");
-			
-	   }
-	%>
+	<table>
+	<jsp:include page="/index.jsp" />
+	<c:forEach var = "newFilms" items = "${newFilms}" varStatus = "loop">	
+	</c:forEach>
+	
+	</table>
 
 	
 </div>
