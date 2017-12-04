@@ -10,37 +10,9 @@ import edu.txstate.internet.cyberflix.data.film.Film;
 import edu.txstate.internet.cyberflix.data.film.Film.FilmRating;
 import edu.txstate.internet.cyberflix.data.film.FilmCategory;
 
-public class DataSource {
-	/*
-	final static String FILM_FILE             = "films.csv";
-	final static String ACTORS_FILE           = "actors.csv";
-	final static String FILM_ACTORS_LINK_FILE = "film_actors.csv";
-	*/
-	
-	public static void init () {
-		/*
-		String realPath = ServletUtils.getProjectInputFilesPath();
-		FilmReader aReader = new FilmReader ();
-		List <Film> films   = aReader.readFilmFile(realPath, FILM_FILE);
-        FilmCatalog filmInventory = FilmCatalog.getInstance();
-        filmInventory.addAll(films);
-        
-		ActorReader actorReader = new ActorReader ();
-		List <Actor> actors = actorReader.readActorFile(realPath, ACTORS_FILE);
-		ActorInventory actorInventory = ActorInventory.getInstance();
-		actorInventory.addAll(actors);
-		
-		FilmActorReader filmActorReader = new FilmActorReader ();
-		List <SimpleEntry <Integer, Integer>> pairs = filmActorReader.readFilmActorFile(realPath, FILM_ACTORS_LINK_FILE);
-		
-		FilmActorBuilder builder = new FilmActorBuilder ();
-		builder.build(filmInventory, actorInventory, pairs);
-		*/
-	}
-	
+public class DataSource {	
 	public static List<Film> findFilmByTitle (String title) {
 		return new FilmDAO().findFilmsByAttributes(title, null, 0, null);
-		//return findFilmByStrategy(new StrategyFindFilmByTitle(title));
 	}
 
 	public static List<Film> findNewestFilms(int maxNew) {

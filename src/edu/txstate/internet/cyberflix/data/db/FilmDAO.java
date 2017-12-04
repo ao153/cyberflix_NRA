@@ -50,6 +50,7 @@ public class FilmDAO extends DAO {
 		try {
 			dbConnection = DAO.getDBConnection();
 			Statement statement = dbConnection.createStatement();
+			System.out.println(selectString);
 			ResultSet results = statement.executeQuery(selectString);
 			films = buildResults(results);
 			dbConnection.close();

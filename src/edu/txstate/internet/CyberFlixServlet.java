@@ -1,7 +1,12 @@
 package edu.txstate.internet;
 
 import java.io.IOException;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.txstate.internet.cyberflix.data.DataSource;
 import edu.txstate.internet.cyberflix.data.film.Film;
+import edu.txstate.internet.cyberflix.data.film.Film.FilmRating;
+import edu.txstate.internet.cyberflix.data.film.FilmCategory;
 import edu.txstate.internet.cyberflix.utils.ServletUtils;
 import edu.txstate.internet.cyberflix.data.db.FilmDAO;
 
@@ -36,15 +43,43 @@ public class CyberFlixServlet extends HttpServlet {
 	public void init() throws ServletException {
 		ServletConfig myConfig = getServletConfig();
 		ServletUtils.setAbsolutePath(myConfig);
-		DataSource.init();
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List <Film> foundFilms = DataSource.findFilmByTitle(request.getParameter("film_title"));
-		 
+		List <Film> foundFilms = null;
+		List<String> parameterNames = new ArrayList<String>(request.getParameterMap().keySet());
+		HashMap<String, String> myHash = new HashMap<>();
+		for (String param : parameterNames) {
+			String key = param;
+			String value = request.getParameter(param);
+			if (value.equals("Any")) value = "0";
+			System.out.println(key + ": " + value);
+			myHash.put(key, value);
+		}
+
+		if (myHash.containsKey("category")) {
+			// catch category selection
+			foundFilms = DataSource.findFilmsByCategory(
+				FilmCategory.valueOf(myHash.get("category")));
+
+		} else if (myHash.containsKey("alpha")) {
+			// catch alphabetical link choice
+			foundFilms = DataSource.findFilmsAlphabetically(myHash.get("alpha"));
+		} else {
+			// make the correct SQL Query based on user input
+			foundFilms = DataSource.findFilmsByAttributes(
+				myHash.get("film_title"), myHash.get("film_description"), 
+				new Integer(myHash.get("length")), 
+				FilmRating.valueOf(myHash.get("film_rating")));
+			
+			// we can add something that detects if all fields are blank to avoid a blank/weird SQL query..
+			// probably low on the priority list compared to some other stuff
+		}
+		
+		
 		// pass the path of the detail servlet that will be encoded in the hyperlink for
 		// associated with the film’s title
 		request.setAttribute("detailServlet",   

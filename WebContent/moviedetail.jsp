@@ -25,6 +25,7 @@
 		</div>
 	<div class = "w3-cell w3-cell-top padding">
 	<h3><c:out value="${film.getTitle()}"/></h3>
+	<p><b>Category: </b><c:out value="${film.getCategory()}"/></p>
 	<p><b>Year: </b><c:out value="${film.getReleaseYear()}"/></p>
 	<p><b>Rating: </b><c:out value="${film.getRating()}"/></p>
 	<p><b>Running Time: </b><c:out value="${film.getLength()}"/></p>

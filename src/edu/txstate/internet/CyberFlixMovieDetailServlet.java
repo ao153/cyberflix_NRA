@@ -34,13 +34,16 @@ public class CyberFlixMovieDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String image = request.getParameter("source");
 		String filmTitle = request.getParameter("film_title");
 		Film myFilm = DataSource.findFilmByTitle(filmTitle).get(0);
+		Film filmDetail = DataSource.getFilmDetail(myFilm); 
+		
+		// debugging film detail
+		System.out.println(filmDetail);
 		
 		// pass the list of films that matched the search query
-		request.setAttribute("film", myFilm);
+		request.setAttribute("film", filmDetail);
 		request.setAttribute("image", image);
 		
 		// forward this request to the following jsp page

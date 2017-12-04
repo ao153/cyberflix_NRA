@@ -1,6 +1,7 @@
 package edu.txstate.internet.cyberflix.data.film;
 
 public enum FilmCategory {
+	NONE,
 	ACTION,
 	ANIMATION,
 	CHILDREN,
