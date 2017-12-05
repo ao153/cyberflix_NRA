@@ -2,6 +2,8 @@ package edu.txstate.internet.cyberflix.data;
 
 import java.util.List;
 
+import edu.txstate.internet.Cart;
+import edu.txstate.internet.CartManager;
 import edu.txstate.internet.cyberflix.data.actor.Actor;
 import edu.txstate.internet.cyberflix.data.customer.Customer;
 import edu.txstate.internet.cyberflix.data.db.CustomerDAO;
@@ -11,8 +13,24 @@ import edu.txstate.internet.cyberflix.data.film.Film.FilmRating;
 import edu.txstate.internet.cyberflix.data.film.FilmCategory;
 
 public class DataSource {	
-	public static List<Film> findFilmByTitle (String title) {
-		return new FilmDAO().findFilmsByAttributes(title, null, 0, null);
+	public static void init() {
+		CartManager cartSystem = CartManager.getInstance();
+	}
+	
+	public static void createCartAt(String key) {
+		CartManager.getInstance().newCartAt(key);
+	}
+	
+	public static void addFilmToCart(String key, Film film) {
+		CartManager.getInstance().getCart(key).addFilm(film);
+	}
+	
+	public static Cart getCart(String key) {
+		return CartManager.getInstance().getCart(key);
+	}
+	
+	public static Film findFilmByTitle (String title) {
+		return new FilmDAO().findFilmsByAttributes(title, null, 0, null).get(0);
 	}
 
 	public static List<Film> findNewestFilms(int maxNew) {

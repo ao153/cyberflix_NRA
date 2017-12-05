@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.txstate.internet.cyberflix.data.DataSource;
 import edu.txstate.internet.cyberflix.data.film.Film;
 
 /**
@@ -30,8 +31,13 @@ public class CyberFlixCartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List <Film> cartFilms = cartFilms = (List<Film>) request.getSession().getAttribute("cartFilms");
-		response.getWriter().append("Cart Page: ").append(cartFilms.toString());
+		String sessionID = request.getSession().getId();
+		Cart myCart = DataSource.getCart(sessionID);
+		
+		response.getWriter().append("Cart Page: ");
+		for (Film film : myCart.getCartFilms()) {
+			response.getWriter().append(film.getTitle() + " ");
+		}
 		
 	}
 

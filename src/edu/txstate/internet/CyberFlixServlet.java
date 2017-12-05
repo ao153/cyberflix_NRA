@@ -44,6 +44,7 @@ public class CyberFlixServlet extends HttpServlet {
 	public void init() throws ServletException {
 		ServletConfig myConfig = getServletConfig();
 		ServletUtils.setAbsolutePath(myConfig);
+		DataSource.init();
 	}
 
 	/**
@@ -82,8 +83,9 @@ public class CyberFlixServlet extends HttpServlet {
 		}
 		
 		// HERE IS THE CART CODE 
-		HttpSession session = request.getSession();
-		session.setAttribute("cartFilms", foundFilms);
+		String sessionID = request.getSession().getId();
+		DataSource.createCartAt(sessionID);
+		//session.setAttribute("userCart", new Cart());
 		
 		// pass the path of the detail servlet that will be encoded in the hyperlink for
 		// associated with the film’s title

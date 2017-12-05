@@ -48,7 +48,7 @@ public class CyberFlixMovieDetailServlet extends HttpServlet {
 
 		String image = myHash.get("source");
 		String filmTitle = myHash.get("film_title");
-		Film myFilm = DataSource.findFilmByTitle(filmTitle).get(0);
+		Film myFilm = DataSource.findFilmByTitle(filmTitle);
 		Film filmDetail = DataSource.getFilmDetail(myFilm); 
 		
 		// pass the film that matched the search query

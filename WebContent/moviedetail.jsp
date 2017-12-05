@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,7 +16,7 @@
   <div class="w3-container w3-black w3-left-align padding">
   <h1>  Movie Details</h1>
   <p> Here is the movie you selected </p>
-  <a id="cartLink" href="CyberFlixCartServlet?cart=fakecart">CART</a>
+  <a id="cartLink" href="CyberFlixCartServlet">CART</a>
   </div>
   <hr>
 <div class="w3-container">
@@ -30,9 +34,9 @@
 		    $.ajax({
 		        type : 'POST',
 		        url : 'addCartServlet?addFilm=${film.title}',
-		        	type: "json",
-		        success : function(){alert("success")},
-		        error : function(){alert("error")}
+		        	datatype: "text",
+		        success : function(response){alert("success")},
+		        error : function(jqXHR, exception){alert("error")}
 		 });
 		}
 		</script>
