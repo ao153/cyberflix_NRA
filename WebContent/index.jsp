@@ -41,6 +41,9 @@ div.descIndex {
            style="width:auto;height:200px"
       >
       <div class="topleft">Welcome to...</div>
+      <!--  LOGIN CODE -->
+      <a style="color:red;" href="login.jsp" target="_blank">LOGIN</a>
+      <!-- END LOGIN CODE -->
 </div>
 <br>
 <div class="w3-card-4 w3-section card center">

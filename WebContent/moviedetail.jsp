@@ -30,13 +30,13 @@
 		<a id="addCart" style="color: red; margin-left: 25%;" href="#" onclick="myFunction()">ADD TO CART</a>
 		<script>
 		function myFunction() {
-		    alert(document.getElementById("addCart").innerHTML);
+		    //alert(document.getElementById("addCart").innerHTML);
 		    $.ajax({
 		        type : 'POST',
 		        url : 'addCartServlet?addFilm=${film.title}',
 		        	datatype: "text",
-		        success : function(response){alert("success")},
-		        error : function(jqXHR, exception){alert("error")}
+		        success : function(response){/*alert("success")*/},
+		        error : function(jqXHR, exception){/*alert("error")*/}
 		 });
 		}
 		</script>

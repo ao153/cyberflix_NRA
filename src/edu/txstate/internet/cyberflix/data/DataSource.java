@@ -2,6 +2,8 @@ package edu.txstate.internet.cyberflix.data;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import edu.txstate.internet.Cart;
 import edu.txstate.internet.CartManager;
 import edu.txstate.internet.cyberflix.data.actor.Actor;
@@ -27,6 +29,10 @@ public class DataSource {
 	
 	public static Cart getCart(String key) {
 		return CartManager.getInstance().getCart(key);
+	}
+	
+	public static Cart getCart(HttpSession session) {
+		return CartManager.getInstance().getCart(session);
 	}
 	
 	public static Film findFilmByTitle (String title) {

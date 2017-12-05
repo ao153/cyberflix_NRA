@@ -85,7 +85,6 @@ public class CyberFlixServlet extends HttpServlet {
 		// HERE IS THE CART CODE 
 		String sessionID = request.getSession().getId();
 		DataSource.createCartAt(sessionID);
-		//session.setAttribute("userCart", new Cart());
 		
 		// pass the path of the detail servlet that will be encoded in the hyperlink for
 		// associated with the film’s title

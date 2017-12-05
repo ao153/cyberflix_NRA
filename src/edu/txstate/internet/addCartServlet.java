@@ -59,6 +59,7 @@ public class addCartServlet extends HttpServlet {
 		
 		String sessionID = request.getSession().getId();
 		Cart myCart = DataSource.getCart(sessionID);
+		//Cart myCart = DataSource.getCart(request.getSession());
 		myCart.addFilm(myFilm);
 		
 		System.out.println("films in cart...");
