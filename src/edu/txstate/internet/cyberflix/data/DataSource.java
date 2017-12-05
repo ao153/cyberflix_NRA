@@ -26,7 +26,6 @@ public class DataSource {
 	public static void addFilmToCart(String key, Film film) {
 		CartManager.getInstance().getCart(key).addFilm(film);
 	}
-	
 	public static Cart getCart(String key) {
 		return CartManager.getInstance().getCart(key);
 	}

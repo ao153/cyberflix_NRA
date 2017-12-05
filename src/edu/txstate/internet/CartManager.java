@@ -18,7 +18,7 @@ public class CartManager {
 	}
 
 	private CartManager () {
-		cartStorage = new HashMap<>();
+		cartStorage = new HashMap<String, Cart>();
 	}
 	
 	public Cart getCart(String key) {

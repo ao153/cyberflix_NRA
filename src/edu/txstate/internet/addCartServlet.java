@@ -32,7 +32,6 @@ public class addCartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String sessionID = request.getSession().getId();
 		String myFilmTitle = request.getParameter("addFilm");
 		System.out.println("get method yo - we should add " + myFilmTitle);
@@ -43,31 +42,18 @@ public class addCartServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-/*
-		HttpSession session = request.getSession();
-		Film myFilm = (Film) DataSource.findFilmByTitle(request.getParameter("addFilm"));
-		System.out.println("post method yo. adding - " + myFilm.getTitle());
-		Cart cart = (Cart) session.getAttribute("userCart");
-		System.out.println(cart.getCart());
-		cart.addFilm(myFilm);
-		System.out.println(cart.getCart());
-		//cart.addFilm(myFilm);
-		//System.out.println(cart.getCart().toString());
-*/
 		Film myFilm = (Film) DataSource.findFilmByTitle(
 			request.getParameter("addFilm"));
 		
 		String sessionID = request.getSession().getId();
 		Cart myCart = DataSource.getCart(sessionID);
-		//Cart myCart = DataSource.getCart(request.getSession());
+		
 		myCart.addFilm(myFilm);
 		
 		System.out.println("films in cart...");
 		for (Film film : myCart.getCartFilms()) {
 			System.out.println(film.getTitle());
 		}
-		
-		//doGet(request, response);
 	}
 
 }

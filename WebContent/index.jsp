@@ -8,6 +8,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <% List<Film> newFilms = DataSource.findNewestFilms(5);%>
 <% request.getSession().setAttribute("newFilms", newFilms);%>
+<% String sessionID = request.getSession().getId(); %>
+<% DataSource.createCartAt(sessionID); %>
 <html> 
 <head><title>CyberFlix</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -134,7 +136,7 @@ function myFunction() {
     </form>
     </div>
     
-<table class = "center">
+<table id="newFilmBanner" class ="center">
 <tr>
     <% int i = 0; %>
     <c:forEach var="film" items="${newFilms}">
@@ -145,29 +147,28 @@ function myFunction() {
     <img src=<%=source %> alt="${film.getTitle()}" width="180px" height="270px">
     <div class ="middle">
     <a class="coverButton" href="CyberFlixMovieDetailServlet?film_title=${film.getTitle()}&source=<%=source%>" >
-    <button class = "w3-button w3-middle-align details" value = "details">More Info</button>
+    <button class = "w3-button w3-middle-align details">More Info</button>
     </a><br>
-    <a class="coverButton" href="#" onclick="myFunction()"><button class = "w3-button w3-middle-align cart" value = "cart">Add to Cart </button></a>
-    <script>
-	function myFunction() {
-    $.ajax({
-        type : "POST",
-        url : "addCartServlet?addFilm=${film.title}",
-        	datatype: "text",
-        success : function(response){/*alert("success")*/},
-        error : function(jqXHR, exception){/*alert("error")*/}
-	 });
-	}
-	</script>
+    <a class="cartButton" href="#newFilmBanner" id="${film.getTitle()}"><button class = "w3-button w3-middle-align cart">Add to Cart </button></a>
     </div>
     <div class="desc">${film.getTitle()} (${film.getReleaseYear()})</div>
     </div>
-    
     </td>
     <% i++;%>
     </c:forEach>
 </tr>
 </table>
-
+    <script>
+    $("a.cartButton").click(function() {
+    	myUrl = "addCartServlet?addFilm=" + $(this).attr('id'); 
+    	$.ajax({
+            type : "POST",
+            url : myUrl,
+            	datatype: "text",
+            success : function(response){},
+            error : function(jqXHR, exception){}
+    	 });
+    })
+	</script>
 </body>
 </html>
