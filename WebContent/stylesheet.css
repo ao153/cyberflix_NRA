@@ -1,72 +1,161 @@
 .color1 {
-	background-color: #B82601;
+    background-color: #B82601;
 }
 .card {
-	margin:auto;
-	margin-bottom: 20px;
-	width: 80%;
-	background-color: rgba(255, 255, 255, 0.6);
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.6);
+    position:relative;
 }
-
-.center {
-    margin: auto;
-    width: 80%;
-    vertical-align:middle;
-}
-
+'
 .film-desc {
-	padding-top: 10px;
-	padding-bottom:10px;
+    padding-top: 10px;
+    padding-bottom:10px;
 }
-
 .img {
-	width:200px;
-	height:300px;
+    width:200px;
+    height:300px;
 }
 .padding {
-	padding-right: 15px;
-	padding-left: 10px;
+    padding-right: 15px;
+    padding-left: 30px;
 }
-
 .headMargin {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
-
-
 .container {
     position: relative;
     background-color: white;
 }
-
 .topleft {
     position: absolute;
     top: 8px;
-    left: 16px;
+    left: 30px;
     font-size: 30px;
     font-family: arial;
     letter-spacing: -1px;
 }
-
 .logo { 
-    width: 100%;
-    height: auto;
     display: block;
-    padding-left: 190px;
+    margin: auto;
+    width: 900px;
+    height:auto;
 }
-
 body {
     background-image: url("http://localhost:8080/CyberFlix_NRA/images/background.jpg");
     background-attachment: fixed;
     background-size:cover;
     background-repeat: no-repeat;
 }
-
 h3 {
-	font-weight: bold;
-	margin-bottom: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+  .center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+table {
+        bgcolor: rgba(255, 255, 255, 0.6);
+        display:table;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        position: relative;
+}
+th{
+    background-color:none;
+    color:white;    
+}
+th a{
+    align: center;
+    padding: 10px;
+    color:white;
+}
+th a:hover {
+    background-color:rgba(255, 255, 255, 0.6);
+    text-decoration:none;
+    color:black;
+}
+.label-pad {
+    color: #404040;
+    font-size:16px;
+    padding-right: 37px;
+}
+.label-pad2{
+    color: #404040;
+    font-size: 16px;
+    padding-right: 18px;
+}
+.label-pad3{
+    color: #404040;
+    font-size: 16px;
+    padding-top: 10px;
+}
+.pointer{
+    cursor:pointer;
+}
+input[type=text] {
+    
+    background: transparent;
+    width: 100%;
+    line-height: 20px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+.alpha-font {
+    font-weight:normal;
+    font-size: 19px;
+}
+.letter-size{
+    font-size: 18px;
+}
+td{
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+td img {
+    width:180px;
+    height:270px;
+}
+td:hover .desc {
+    opacity:0.3;
+}
+td:hover img {
+    opacity:0.3;
+}
+td:hover .middle {
+    opacity: 1;
+}
+.container1 {
+    position:relative;
+}
+.desc {
+    padding: 15px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.6); 
+}
+.details{
+    display:block; 
+    top:50%;
+    left:55%;
+    
+}
+.cart{
+    display:block; 
+    left:50%;
+    top:50%;
+        
+}
+.middle {
+    opacity: 0;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
 }
 
-#cartLink {
-	float: right;
-	color: red;
+.coverButton {
+	text-decoration: none;
+	display: inline;
 }

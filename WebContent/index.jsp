@@ -12,6 +12,11 @@
 <head><title>CyberFlix</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="http://localhost:8080/CyberFlix_NRA/stylesheet.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 </head> 
 <style>
 div.galleryIndex {
@@ -128,18 +133,41 @@ function myFunction() {
     <button class="w3-button w3-block w3-light-grey w3-right-align" type = "submit" value = "Submit">Submit</button>
     </form>
     </div>
-    <div class = "center">
+    
+<table class = "center">
+<tr>
     <% int i = 0; %>
     <c:forEach var="film" items="${newFilms}">
-    <div class="galleryIndex hoverIndex">
+    <td>
+    <div id="new" class = "gallery container1">
     <%String source ="http://localhost:8080/CyberFlix_NRA/images/" + i + ".jpeg";  %>
-    <a href="http://localhost:8080/CyberFlix_NRA/CyberFlixMovieDetailServlet?film_title=${film.getTitle()}&source=<%=source%>">
+<%--     <a href="http://localhost:8080/CyberFlix_NRA/CyberFlixMovieDetailServlet?film_title=${film.getTitle()}&source=<%=source%>"> --%>
     <img src=<%=source %> alt="${film.getTitle()}" width="180px" height="270px">
-    </a>
-    <div class="descIndex">${film.getTitle()} (${film.getReleaseYear()})</div>
+    <div class ="middle">
+    <a class="coverButton" href="CyberFlixMovieDetailServlet?film_title=${film.getTitle()}&source=<%=source%>" >
+    <button class = "w3-button w3-middle-align details" value = "details">More Info</button>
+    </a><br>
+    <a class="coverButton" href="#" onclick="myFunction()"><button class = "w3-button w3-middle-align cart" value = "cart">Add to Cart </button></a>
+    <script>
+	function myFunction() {
+    $.ajax({
+        type : "POST",
+        url : "addCartServlet?addFilm=${film.title}",
+        	datatype: "text",
+        success : function(response){/*alert("success")*/},
+        error : function(jqXHR, exception){/*alert("error")*/}
+	 });
+	}
+	</script>
     </div>
+    <div class="desc">${film.getTitle()} (${film.getReleaseYear()})</div>
+    </div>
+    
+    </td>
     <% i++;%>
     </c:forEach>
-    </div>
+</tr>
+</table>
+
 </body>
 </html>
