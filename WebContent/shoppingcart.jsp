@@ -8,6 +8,7 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="http://localhost:8080/CyberFlix_NRA/stylesheet.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<%@ page import = "edu.txstate.internet.cyberflix.data.DataSource" %>
 <script
 src="https://code.jquery.com/jquery-3.2.1.min.js"
 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -17,7 +18,12 @@ crossorigin="anonymous"></script>
 <body>
 <div class="w3-container w3-black w3-right-align padding" style = "padding-top:10px">
 <h1>Movies In Your Cart</h1>
-<p> Here are your current movies </p>
+  <c:if test = "${DataSource.getUser().getFirstName().equals('Guest')}">
+    <p> Here are your current movies </p>
+  </c:if>
+  <c:if test = "${!DataSource.getUser().getFirstName().equals('Guest')}">
+	<p><c:out value="${DataSource.getUser().getFirstName()}"/>... here are your current movies </p>
+  </c:if>
 </div>
 <br>
 <c:if test="${empty films}">
@@ -57,5 +63,8 @@ i = 0;
 </div>
 <br> 
 </c:forEach>
+
+<!-- PUT A BUTTON HERE THAT SAYS "CHECKOUT" AND TAKES YOU TO A NEW PAGE THAT SHOWS A TOTAL PER DAY ($1 x # OF FILMS IN CART) -->
+
 </body>
 </html>

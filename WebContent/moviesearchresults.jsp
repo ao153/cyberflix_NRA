@@ -2,23 +2,26 @@
 pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page import="java.util.*" %>
+<%@ page import = "edu.txstate.internet.cyberflix.data.DataSource" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="http://localhost:8080/CyberFlix_NRA/stylesheet.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <script
 src="https://code.jquery.com/jquery-3.2.1.min.js"
 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 crossorigin="anonymous"></script>
+
 <title>CyberFlix Search Results</title>
 </head>
 <body>
 <div class="w3-container w3-black w3-right-align padding" style = "padding-top:10px">
 <h1>Movies Matching Your Search</h1>
 <p> Here are the movies we found </p>
-<p class = "w3-left-align detailCartStuff"> <a id="cartLink" href="CyberFlixCartServlet?cart=fakecart" class ="dCS2">Shopping Cart
+<p class = "w3-left-align detailCartStuff"> <a id="cartLink" href="CyberFlixCartServlet" class ="dCS2">Shopping Cart
 <i class="material-icons" style="font-size:30px;vertical-align:middle;color:#B82601;">add_shopping_cart</i>
 </a>
 </p>
