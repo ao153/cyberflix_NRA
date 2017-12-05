@@ -1,4 +1,22 @@
-   .color1 {
+h5 {
+	font-size: 85%;
+	margin-top: 0;
+	margin-bottom: 1%;
+}
+
+.invoiceBox {
+	max-width: 60%;
+	min-height: 20%;
+	margin: 2% auto 2% auto;
+	text-align: center;
+	padding-bottom: 1%;
+}
+
+.checkoutBtn {
+	max-width: 80%;
+	margin: 2% auto 2% auto;
+}
+.color1 {
     background-color: #B82601;
 }
 .card {
@@ -6,7 +24,6 @@
     background-color: rgba(255, 255, 255, 0.6);
     position:relative;
 }
-'
 .film-desc {
     padding-top: 10px;
     padding-bottom:10px;
