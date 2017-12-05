@@ -17,10 +17,16 @@ crossorigin="anonymous"></script>
 <div class="w3-container w3-black w3-left-align padding" style = "padding-top:10px;padding-left:30px;">
 <h1><b>  Movie Details </b></h1>
 <h4> Here is the movie you selected </h4>
-<p class = "w3-right-align detailCartStuff"> <a id="cartLink" href="CyberFlixCartServlet?cart=fakecart" class ="dCS2">Shopping Cart
+<!-- shopping cart icon -->
+<% String sessionID = request.getSession().getId(); %>
+<c:set var="sessionID" value="<%=sessionID%>" />
+<c:if test="${DataSource.getCart(sessionID).getSize() != 0}">
+<p class = "w3-left-align detailCartStuff"> <a id="cartLink" href="CyberFlixCartServlet" class ="dCS2">Shopping Cart
 <i class="material-icons" style="font-size:30px;vertical-align:middle;color:#B82601;">add_shopping_cart</i>
 </a>
 </p>
+</c:if>
+<!-- end shopping cart icon -->
 </div>
 <br>
 <div class="w3-container">

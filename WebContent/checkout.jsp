@@ -22,6 +22,7 @@ crossorigin="anonymous"></script>
 <div class="w3-card w3-white invoiceBox">
   <c:if test="${requestScope.first_name.equals('Guest')}">
     <h3>Please Login or Create an account to enable checkout.</h3>
+    <a style="color:red;" href="login.jsp" target="_blank">LOGIN</a>
   </c:if>
   <c:if test="${!requestScope.first_name.equals('Guest')}">
 	<h3><c:out value="${requestScope.customer_name}"/></h3>

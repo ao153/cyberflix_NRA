@@ -48,6 +48,7 @@ crossorigin="anonymous"></script>
     </div>
 <div class = "w3-cell w3-cell-top w3-padding">
 <h3><c:out value="${film.getTitle()}"/></h3><br>
+<b>Rental Price: </b>$1.00 per day<br>
 <b>Year: </b><c:out value="${film.getReleaseYear()}"/><br>
 <b>Rating: </b><c:out value="${film.getRating()}"/><br>
 <b>Running Time: </b><c:out value="${film.getLength()}"/><hr>

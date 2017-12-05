@@ -24,6 +24,7 @@ h5 {
     background-color: rgba(255, 255, 255, 0.6);
     position:relative;
 }
+'
 .film-desc {
     padding-top: 10px;
     padding-bottom:10px;
@@ -152,17 +153,34 @@ td:hover .middle {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.6); 
 }
-.details{
+.details {
     display:block; 
     top:50%;
-    left:55%;
+    left:50%;
+    border: none;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    width:auto;
     
 }
-.cart{
+.detailsL:hover{
+    text-decoration:none;
+    color:black;
+}
+.cart {
     display:block; 
-    left:50%;
     top:50%;
-        
+    left:50%;
+    border: none;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    width:auto;
 }
 .middle {
     opacity: 0;
@@ -191,4 +209,69 @@ td:hover .middle {
     border: 1px solid white;
     padding:10px;
     color:white;
+}
+.navbar {
+    
+    background-color: #111;
+    font-family: Arial;
+    left: 10%;
+    right: auto;
+    text-align: center;
+    transform: translate(-10%, 0);
+}
+.navbar a {
+    float: none;
+    display:inline;
+    font-size: 16px;
+    color: white;
+    vertical-align: middle;
+    padding: 7px 7px;
+    text-decoration: none;
+}
+.dropdown {
+    float: none;
+    display:inline;
+}
+.dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 7px 7px;
+    background-color: #111;
+    padding-right:50px;
+}
+.aBar:hover,  .dropdown:hover, .dropbtn {
+    text-decoration:none;
+    color:purple;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    margin-left:20%;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 7px 7px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.dropdown-content a:hover {
+    background-color: #111;
+    text-decoration:none;
+    color:purple;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.no:hover {
+    background-color:#111;
+    color:white;
+    text-decoration:none;
 }

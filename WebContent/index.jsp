@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="http://localhost:8080/CyberFlix_NRA/stylesheet.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script
 src="https://code.jquery.com/jquery-3.2.1.min.js"
 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -22,33 +23,39 @@ crossorigin="anonymous"></script>
 </head> 
 <body> 
 <div class="w3-container w3-black w3-left-align padding"  style = "height: 190px">
-
   <div class = "topleft">Welcome to...</div>
   <img class = "logo"
        src = "http://localhost:8080/CyberFlix_NRA/images/logo.jpg"
        alt = "logo"
        >
   </div>
-<br>
 <c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z" />
-<div class = "w3-bar w3-black" style = "height: 40px">
-    <table class = "center">
-    <tr>  
-        <th class = "w3-bar-item alpha-font">Browse Alphabetically:</th>
-            <c:forTokens var="letter" items="${alphabet}" delims=",">
-            <th class = "letter-size"><a href = "CyberFlixServlet?alpha=${letter}">${letter}</a></th>
+<c:set var="categories" value="ACTION,ANIMATION,CHILDREN,CLASSICS
+                          ,COMEDY,DOCUMENTARY,DRAMA,FAMILY,FOREIGN
+                              ,GAMES,HORROR,MUSIC,NEW,SCI_FI,SPORTS,TRAVEL" />
+<div class = "navbar">
+    <div class = "dropdown">
+        <button class = "dropbtn"> Browse by Genre <i class="fa fa-caret-down"></i></button>
+        <div class = "dropdown-content">
+            <c:forTokens var = "category" items = "${categories}" delims = ",">
+            <a href="CyberFlixServlet?category=${category}" onclick = "myFunction()">${category}</a>
             </c:forTokens>
-    </tr>
-    </table>
+        </div>
+    </div>
+    <a class = "w3-navbar-item no" style = "padding: 8px;font-size:16px;"> | </a>
+    <a class = "w3-navbar-item no">Browse Alphabetically:</a>
+    <c:forTokens var = "letter" items = "${alphabet}" delims = ",">
+    <a href = "CyberFlixServlet?alpha=${letter}" class ="aBar">${letter}</a>
+    </c:forTokens>
 </div>
-  <!--  LOGIN CODE -->
+<!--  LOGIN CODE -->
   <c:if test = "${DataSource.getUser().getFirstName().equals('Guest')}">
     <a style="color:red;" href="login.jsp" target="_blank">LOGIN</a>
   </c:if>
   <c:if test = "${!DataSource.getUser().getFirstName().equals('Guest')}">
     <h4 style="color:red;">${DataSource.getUser().getFirstName()}</h4>
   </c:if>
-  <!-- END LOGIN CODE -->
+<!-- END LOGIN CODE -->
 <div class="center card w3-card-4 w3-section">
     <header class="w3-container color1">
     <h1 class = "w3-text-white" style = "text-shadow: 1px 0px 0 #444">Search</h1>
