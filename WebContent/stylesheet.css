@@ -1,8 +1,8 @@
-.color1 {
+   .color1 {
     background-color: #B82601;
 }
 .card {
-    width: 70%;
+    width: 61%;
     background-color: rgba(255, 255, 255, 0.6);
     position:relative;
 }
@@ -30,7 +30,7 @@
     position: absolute;
     top: 8px;
     left: 30px;
-    font-size: 30px;
+    font-size: 25px;
     font-family: arial;
     letter-spacing: -1px;
 }
@@ -48,7 +48,7 @@ body {
 }
 h3 {
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
   .center {
     margin-left:auto; 
@@ -73,7 +73,7 @@ th a{
 th a:hover {
     background-color:rgba(255, 255, 255, 0.6);
     text-decoration:none;
-    color:black;
+    color:purple;
 }
 .label-pad {
     color: #404040;
@@ -154,8 +154,24 @@ td:hover .middle {
     left:50%;
     transform: translate(-50%, -50%);
 }
-
-.coverButton {
-	text-decoration: none;
-	display: inline;
+.srdetails {
+    color:white;
+    font-size: 16px;
+    position:absolute;
+    bottom: 5px;
+}
+.srCart{
+    position:absolute;
+    right: 5px;
+    bottom: 5px;
+}
+.detailCartStuff {
+    font-size:20px;
+    padding-right:15px;
+}
+.dCS2{
+    text-decoration:none;
+    border: 1px solid white;
+    padding:10px;
+    color:white;
 }

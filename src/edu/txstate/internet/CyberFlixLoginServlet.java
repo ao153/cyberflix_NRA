@@ -53,6 +53,7 @@ public class CyberFlixLoginServlet extends HttpServlet {
 						+ customer.getLastName() 
 						+ ". You may close this window.");
 				System.out.println("logged in as " + customer.getFirstName());	
+				
 			} else {
 				response.getWriter().append("Invalid Password. Close this window to attempt to login again.");
 				System.out.println("invalid password");
