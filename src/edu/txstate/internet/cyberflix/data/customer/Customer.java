@@ -15,6 +15,13 @@ public class Customer {
 		this.emailAddress = emailAddress;
 		this.password = "newUser";
 	}
+	
+	public Customer() {
+		this.firstName = "Guest";
+		this.lastName = null;
+		this.emailAddress = null;
+		this.password = null;
+	}
 
 	public int getId() {
 		return id;

@@ -42,7 +42,12 @@ crossorigin="anonymous"></script>
     </table>
 </div>
   <!--  LOGIN CODE -->
-  <a style="color:red;" href="login.jsp" target="_blank">LOGIN</a>
+  <c:if test = "${DataSource.getUser().getFirstName().equals('Guest')}">
+    <a style="color:red;" href="login.jsp" target="_blank">LOGIN</a>
+  </c:if>
+  <c:if test = "${!DataSource.getUser().getFirstName().equals('Guest')}">
+    <h4 style="color:red;">${DataSource.getUser().getFirstName()}</h4>
+  </c:if>
   <!-- END LOGIN CODE -->
 <div class="center card w3-card-4 w3-section">
     <header class="w3-container color1">

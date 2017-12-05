@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import edu.txstate.internet.Cart;
 import edu.txstate.internet.CartManager;
+import edu.txstate.internet.UserManager;
 import edu.txstate.internet.cyberflix.data.actor.Actor;
 import edu.txstate.internet.cyberflix.data.customer.Customer;
 import edu.txstate.internet.cyberflix.data.db.CustomerDAO;
@@ -17,6 +18,7 @@ import edu.txstate.internet.cyberflix.data.film.FilmCategory;
 public class DataSource {	
 	public static void init() {
 		CartManager cartSystem = CartManager.getInstance();
+		UserManager userSystem = UserManager.getInstance();
 	}
 	
 	public static void createCartAt(String key) {
@@ -32,6 +34,14 @@ public class DataSource {
 	
 	public static Cart getCart(HttpSession session) {
 		return CartManager.getInstance().getCart(session);
+	}
+	
+	public static void logInAs(Customer customer) {
+		UserManager.getInstance().logInAs(customer);
+	}
+	
+	public static Customer getUser() {
+		return UserManager.getInstance().getUser();
 	}
 	
 	public static Film findFilmByTitle (String title) {

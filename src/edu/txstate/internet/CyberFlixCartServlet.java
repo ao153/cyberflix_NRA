@@ -42,6 +42,13 @@ public class CyberFlixCartServlet extends HttpServlet {
 			response.getWriter().append(film.getTitle() + " ");
 		}
 		
+		// pass the list of films that matched the search query
+		request.setAttribute("films", myCart.getCartFilms());
+
+		// forward this request to the following jsp page
+		request.getRequestDispatcher("shoppingcart.jsp").
+		    forward(request,  response);
+		
 	}
 
 	/**
