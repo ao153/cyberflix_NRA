@@ -41,6 +41,9 @@ crossorigin="anonymous"></script>
 <!-- END CHECKOUT BTN -->
 </p>
 </c:if>
+<div style="color: yellow;">
+<c:out value="${DataSource.getCart(sessionID).getSize()}" />
+</div>
 <!-- end shopping cart icon -->
 </div>
 <br>

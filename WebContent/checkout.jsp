@@ -64,7 +64,7 @@ pageEncoding="UTF-8"%>
                   success : function(response){},
                   error : function(jqXHR, exception){}
              });
-            })
+            });
         </script>  
   </c:if>
 </div>
