@@ -2,6 +2,7 @@ package edu.txstate.internet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,16 +47,20 @@ public class CyberFlixCheckoutServlet extends HttpServlet {
 		request.setAttribute("customer_name", customerName);
 		request.setAttribute("customer_email", customerEmail);
 		
-		/*
-		// DEBUGGING RENTALRECORDS HERE
-		ArrayList<RentalRecord> myRentals = (ArrayList<RentalRecord>) DataSource.findRentalByCustomer(myUser);
-		for (RentalRecord record : myRentals) {
-			Film rentedFilm = DataSource.findFilmByID(record.getFilmID());
-			Customer rentedFilmUser = DataSource.findCustomerByID(record.getCustomerID());
-			System.out.println("FILM: " + rentedFilm.getTitle() + " - USER: " + rentedFilmUser.getFirstName());	
+		/* BEGIN CURRENT RENTAL CODE */
+		ArrayList<RentalRecord> currentRentals = (ArrayList<RentalRecord>) DataSource.findRentalByCustomer(myUser);
+		ArrayList<Film> rentalFilms = new ArrayList<>();
+		HashMap<String, String> dateMap = new HashMap<>();
+		for (RentalRecord rental : currentRentals) {
+			int filmID = rental.getFilmID();
+			String filmTitle = DataSource.findFilmByID(filmID).getTitle();
+			dateMap.put(filmTitle, rental.getRentalDate().toString());
+			rentalFilms.add(DataSource.findFilmByID(filmID));
 		}
-		// END RENTALRECORDS DEBUGGING
-		*/
+		request.setAttribute("films", rentalFilms);
+		request.setAttribute("dateMap", dateMap);
+		/* END CURRENT RENTAL CODE */
+		
 		// forward this request to the following jsp page
 		request.getRequestDispatcher("checkout.jsp").
 		    forward(request,  response);

@@ -23,8 +23,8 @@ crossorigin="anonymous"></script>
            style="width:auto;height:200px"
       >
 </div>
-<div class="w3-container w3-black w3-right-align padding" style = "padding-top:10px">
-<h1 style="margin-right:60px">Movies In Your Cart</h1>
+<div class="w3-container w3-black w3-right-align padding" style="padding-top:10px">
+<h1 style="margin-right:60px">Checked Out Rentals</h1>
   <c:if test = "${!DataSource.getUser().getFirstName().equals('Guest')}">
     <p style="margin-right:60px"> <c:out value="${DataSource.getUser().getFirstName()}"/> - EMPLOYEE DASHBOARD</p>
   </c:if>
@@ -35,16 +35,19 @@ crossorigin="anonymous"></script>
 <i> We Couldn't Find Any Checked Out Rentals. </i>
 </div>
 </c:if>
+
+<!-- new code here -->
+<div class="w3-card w3-round-large invoiceBox" style="background-color: rgba(255, 255, 255, 0.3); padding-top: 25px; width: 50%;">
 <% int i = 0; %>
-<% int userIndex = 0; %>
+<h3 style="color: white; margin-bottom: 25px;">Currently Checked Out:</h3>
 <c:forEach var="film" items="${requestScope.films}">
 <% String source = "http://localhost:8080/CyberFlix_NRA/images/" + i + ".jpeg"; %>
-<div class="w3-card-4 center card" style = "height: 315px; width: 700px">
-<div class = "w3-row">
+<div class="w3-card-4 center card" style = "height: 10%px; width: 60%">
+<div>
     <div class = "w3-cell">
     <a href="${requestScope.detailServlet}?film_title=${film.getTitle()}&source=<%=source%>">
     <img class="w3-image"
-         style = "height: 315px; width: 210px"
+         style = "height: 200px;"
          src=<%=source%>
          alt="${film.title}"
     >
@@ -56,9 +59,7 @@ crossorigin="anonymous"></script>
 <b>Rental Date: </b><c:out value="${requestScope.dateMap.get(film.getTitle())}"/><br>
 <b>Year: </b><c:out value="${film.getReleaseYear()}"/><br>
 <b>Rating: </b><c:out value="${film.getRating()}"/><br>
-<b>Running Time: </b><c:out value="${film.getLength()}"/><hr>
-<c:out value="${film.getDescription()}"/>
-<br>
+<b>Running Time: </b><c:out value="${film.getLength()}"/>
 </div>
 </div>
 <% i ++;
@@ -68,7 +69,6 @@ i = 0;
 </div>
 <br> 
 </c:forEach>
-<% userIndex++; %>
-
+</div>
 </body>
 </html>

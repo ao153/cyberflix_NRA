@@ -39,7 +39,7 @@ public class DataSource {
     public static List<RentalRecord> findCheckedOutRentals() {
     		return new RentalDAO().findCheckedOutRentals();
     }
-    
+   
 	public static void createCartAt(String key) {
 		CartManager.getInstance().newCartAt(key);
 	}

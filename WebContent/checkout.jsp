@@ -27,7 +27,8 @@ pageEncoding="UTF-8"%>
 <div class="w3-container w3-black w3-right-align padding" style="padding-top:10px">
     <h1 style="margin-right:60px">Checkout</h1>
 </div>
-<div class="w3-card w3-round-large invoiceBox" style="background-color: rgba(255, 255, 255, 0.3);">
+
+<div class="w3-text-white w3-card w3-round-large invoiceBox" style="background-color: rgba(255, 255, 255, 0.3); margin-top: 5%;">
   <c:if test="${requestScope.first_name.equals('Guest')}">
   
     <h3 class="w3-text-white"
@@ -67,5 +68,37 @@ pageEncoding="UTF-8"%>
         </script>  
   </c:if>
 </div>
+<!-- BEGIN CURRENT CHECKED OUT -->
+<div class="w3-card w3-round-large invoiceBox" style="background-color: rgba(255, 255, 255, 0.3); padding-top: 25px; width: 40%;">
+<% int i = 0; %>
+<h3 style="color: white; margin-bottom: 25px;">Currently Checked Out:</h3>
+<c:forEach var="film" items="${requestScope.films}">
+<% String source = "http://localhost:8080/CyberFlix_NRA/images/" + i + ".jpeg"; %>
+<div class="w3-card-4 center card" style = "height: 150px; width: 70%">
+<div class = "w3-row">
+    <div class = "w3-cell">
+    <a href="${requestScope.detailServlet}?film_title=${film.getTitle()}&source=<%=source%>">
+    <img class="w3-image"
+         style = "height: 150px;"
+         src=<%=source%>
+         alt="${film.title}"
+    >
+    </a>
+    </div>
+<div class = "w3-cell w3-cell-top w3-padding">
+<h3><c:out value="${film.getTitle()}"/></h3><br>
+<b>Rental Date: </b><c:out value="${requestScope.dateMap.get(film.getTitle())}"/><br>
+</div>
+</div>
+<% i ++;
+if(i == 9)
+i = 0;
+%>
+</div>
+<br> 
+</c:forEach>
+</div>
+<!-- END CURRENT CHECKED OUT -->
+
 </body>
 </html>
