@@ -18,7 +18,7 @@ public class Customer {
 	
 	public Customer() {
 		this.firstName = "Guest";
-		this.lastName = null;
+		this.lastName = "Guest";
 		this.emailAddress = null;
 		this.password = null;
 	}

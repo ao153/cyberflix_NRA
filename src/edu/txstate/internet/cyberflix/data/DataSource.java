@@ -69,6 +69,10 @@ public class DataSource {
 		return new CustomerDAO().findCustomerByEmail(emailAddress);
 	}
 	
+	public static void saveNewCustomer(Customer customer) {
+		new CustomerDAO().save(customer);
+	}
+	
 	public static List<Actor> findActorsInFilm(Film film) {
 		return new FilmDAO().findActorsInFilm(film);
 	}

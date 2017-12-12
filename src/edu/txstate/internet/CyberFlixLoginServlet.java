@@ -39,29 +39,45 @@ public class CyberFlixLoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email_address");
 		String password = request.getParameter("password");
-		System.out.println(email);
+		String userType = request.getParameter("user_type");
+		System.out.println(userType);
 		
-		Customer customer = DataSource.findCustomerByEmail(email);
-		if (customer == null) {
-			response.getWriter().append("Customer not found. "
-					+ "Please close this window and try again.");
-			System.out.println("customer not found");
-		} else {
-			if (password.equals(customer.getPassword())) {
-				response.getWriter().append("Logged in as " 
-						+ customer.getFirstName() + " " 
-						+ customer.getLastName() 
-						+ ". You may close this window.");
-				System.out.println("logged in as " + customer.getFirstName());	
-				DataSource.logInAs(customer);
+		if (userType.equals("existing")) {
+			Customer customer = DataSource.findCustomerByEmail(email);
+			if (customer == null) {
+				response.getWriter().append("Customer not found. "
+						+ "Please close this window and try again.");
+				System.out.println("customer not found");
 			} else {
-				response.getWriter().append("Invalid Password. Close this window to attempt to login again.");
-				System.out.println("invalid password");
+				if (password.equals(customer.getPassword())) {
+					response.getWriter().append("Logged in as " 
+							+ customer.getFirstName() + " " 
+							+ customer.getLastName() 
+							+ ". You may close this window.");
+					System.out.println("logged in as " + customer.getFirstName());	
+					DataSource.logInAs(customer);
+				} else {
+					response.getWriter().append("Invalid Password. Close this window to attempt to login again.");
+					System.out.println("invalid password");
+				}	
 			}
+		} else if (userType.equals("new")) {
+			System.out.println("new user creation stub");
 			
+			// create customer object
+			Customer newCustomer = new Customer();
+			newCustomer.setEmailAddress(email);
+			newCustomer.setPassword(password);
+			
+			// save to DB
+			DataSource.saveNewCustomer(newCustomer);
+			
+			// display confirmation
+			response.getWriter().append("NEW USER CREATED - logged in as " 
+					+ newCustomer.getFirstName() + " " 
+					+ newCustomer.getEmailAddress() 
+					+ ". You may close this window.");
 		}
-		//doGet(request, response);
-		
 	}
 
 }
