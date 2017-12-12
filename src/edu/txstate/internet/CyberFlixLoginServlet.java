@@ -68,6 +68,8 @@ public class CyberFlixLoginServlet extends HttpServlet {
 			Customer newCustomer = new Customer();
 			newCustomer.setEmailAddress(email);
 			newCustomer.setPassword(password);
+			newCustomer.setFirstName("New");
+			newCustomer.setLastName("User");
 			
 			// save to DB
 			DataSource.saveNewCustomer(newCustomer);
