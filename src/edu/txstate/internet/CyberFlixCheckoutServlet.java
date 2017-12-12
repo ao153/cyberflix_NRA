@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.txstate.internet.cyberflix.data.DataSource;
 import edu.txstate.internet.cyberflix.data.customer.Customer;
@@ -45,17 +46,16 @@ public class CyberFlixCheckoutServlet extends HttpServlet {
 		request.setAttribute("customer_name", customerName);
 		request.setAttribute("customer_email", customerEmail);
 		
+		/*
 		// DEBUGGING RENTALRECORDS HERE
 		ArrayList<RentalRecord> myRentals = (ArrayList<RentalRecord>) DataSource.findRentalByCustomer(myUser);
 		for (RentalRecord record : myRentals) {
 			Film rentedFilm = DataSource.findFilmByID(record.getFilmID());
-			System.out.println("FILM: " + rentedFilm.getTitle() + " - USER: " + record.getCustomerID());	
+			Customer rentedFilmUser = DataSource.findCustomerByID(record.getCustomerID());
+			System.out.println("FILM: " + rentedFilm.getTitle() + " - USER: " + rentedFilmUser.getFirstName());	
 		}
-		
-		RentalRecord myRecord = new RentalRecord(0, null, 0, 0, null);
-		
 		// END RENTALRECORDS DEBUGGING
-		
+		*/
 		// forward this request to the following jsp page
 		request.getRequestDispatcher("checkout.jsp").
 		    forward(request,  response);
@@ -65,8 +65,25 @@ public class CyberFlixCheckoutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+		HttpSession session = request.getSession();
+		
+		Customer myUser = DataSource.getUser();
+		Cart myCart = DataSource.getCart(session);
+		
+		for (Film film : myCart.getCartFilms()) {
+			int userID = myUser.getId();
+			RentalRecord newRecord = new RentalRecord(0, null, film.getFilmID(), userID, null);	
+			DataSource.saveNewRental(newRecord);
+			System.out.println("CHECKED OUT - FILM ID: " + newRecord.getFilmID());
+		}
+		
+		ArrayList<RentalRecord> myRentals = (ArrayList<RentalRecord>) DataSource.findRentalByCustomer(myUser);
+		System.out.println("Currently checked out to you...");
+		for (RentalRecord record : myRentals) {
+			Film rentedFilm = DataSource.findFilmByID(record.getFilmID());
+			Customer rentedFilmUser = DataSource.findCustomerByID(record.getCustomerID());
+			System.out.println("FILM: " + rentedFilm.getTitle() + " - USER: " + rentedFilmUser.getFirstName());	
+		}
 	}
-
 }

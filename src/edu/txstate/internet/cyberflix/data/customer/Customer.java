@@ -13,7 +13,10 @@ public class Customer {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailAddress = emailAddress;
-		this.password = "newUser";
+		if (password.equals(null))
+			this.password = "newUser";
+		else
+			this.password = password;
 	}
 	
 	public Customer() {

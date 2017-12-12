@@ -38,18 +38,14 @@ public class CyberFlixCartServlet extends HttpServlet {
 		String sessionID = request.getSession().getId();
 		HttpSession session = request.getSession();
 		Cart myCart = DataSource.getCart(session);
-		ArrayList<RentalRecord> rentalRecords = new ArrayList<>();
 		
-		//response.getWriter().append("Cart Page: ");
+		/*
 		for (Film film : myCart.getCartFilms()) {
-			//response.getWriter().append(film.getTitle() + " ");
 			int userID = DataSource.getUser().getId();
-			RentalRecord newRecord = new RentalRecord(0, null, film.getFilmID(), userID, null);
-			
-			
+			RentalRecord newRecord = new RentalRecord(0, null, film.getFilmID(), userID, null);	
 			DataSource.saveNewRental(newRecord);
-			rentalRecords.add(newRecord);
 		}
+		*/
 		
 		// pass the list of films that matched the search query
 		request.setAttribute("films", myCart.getCartFilms());
@@ -58,18 +54,13 @@ public class CyberFlixCartServlet extends HttpServlet {
 		request.getRequestDispatcher("shoppingcart.jsp").
 		    forward(request,  response);
 		
-		for (RentalRecord record : rentalRecords) {
-			System.out.println("RECORD - FILM ID: " + record.getFilmID());
-		}
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		doGet(request, response);		
 	}
 
 }

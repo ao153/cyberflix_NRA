@@ -55,6 +55,38 @@ public class CustomerDAO extends DAO {
 			return customers.get(0);
 	}
 	
+	public Customer findCustomerByID(int userID) {
+		final String CUSTOMER_SELECT = "SELECT * FROM customer ";
+		final String ID_CLAUSE = "WHERE customer_id = ";
+		final String selectString = CUSTOMER_SELECT + ID_CLAUSE + '"' + userID + '"'; 
+		
+		List<Customer> customers = new ArrayList<>();
+		Connection dbConnection = null;
+		try {
+			dbConnection = DAO.getDBConnection();
+			Statement statement = dbConnection.createStatement();
+			ResultSet results = statement.executeQuery(selectString);
+			while (results.next()) {
+				customers.add(new Customer(
+						results.getInt("customer_id"),
+						results.getString("first_name"),
+						results.getString("last_name"),
+						results.getString("email"),
+						results.getString("password")
+				));
+			}
+			dbConnection.close();
+		} catch (SQLException e) {
+			System.err.println("CustomerDAO.findByID: " + e.toString());
+			LOGGER.severe(e.toString());
+			DAO.closeQuietly(dbConnection);
+		}
+		if (customers.isEmpty())
+			return null;
+		else	
+			return customers.get(0);
+	}
+	
 	// start professor code
 	public void save (Object object) {
 		if ((object instanceof Customer) == false)

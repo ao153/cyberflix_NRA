@@ -47,6 +47,10 @@ public class DataSource {
 		return UserManager.getInstance().getUser();
 	}
 	
+	public static Customer findCustomerByID(int userID) {
+		return new CustomerDAO().findCustomerByID(userID);
+	}
+	
 	public static Film findFilmByID(int filmID) {
 		return new FilmDAO().findFilmByID(filmID);
 	}

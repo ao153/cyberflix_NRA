@@ -53,7 +53,16 @@ pageEncoding="UTF-8"%>
         </button>
          <script>
             $("button.confirmBtn").click(function() {
-              alert("You have been charged $" + $(this).data("cost") + ". Thanks!"); 
+           	  alert("You have been charged $" + $(this).data("cost") + ". Thanks!"); 
+              
+              myUrl = "CyberFlixCheckoutServlet";
+              $.ajax({
+                  type : "POST",
+                  url : myUrl,
+                  datatype: "text",
+                  success : function(response){},
+                  error : function(jqXHR, exception){}
+             });
             })
         </script>  
   </c:if>
