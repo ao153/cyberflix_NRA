@@ -16,13 +16,20 @@ crossorigin="anonymous"></script>
 <title>CyberFlix Shopping Cart</title>
 </head>
 <body>
+<div class="container w3-black">      
+      <img class="logo"
+           src="http://localhost:8080/CyberFlix_NRA/images/logo.jpg" 
+           alt="Logo" 
+           style="width:auto;height:200px"
+      >
+</div>
 <div class="w3-container w3-black w3-right-align padding" style = "padding-top:10px">
-<h1>Movies In Your Cart</h1>
+<h1 style="margin-right:60px">Movies In Your Cart</h1>
   <c:if test = "${DataSource.getUser().getFirstName().equals('Guest')}">
-    <p> Here are your current movies </p>
+    <p style="margin-right:60px"> Here are your current movies </p>
   </c:if>
   <c:if test = "${!DataSource.getUser().getFirstName().equals('Guest')}">
-	<p><c:out value="${DataSource.getUser().getFirstName()}"/>... here are your current movies </p>
+    <p style="margin-right:60px"> <c:out value="${DataSource.getUser().getFirstName()}"/>... here are your current movies </p>
   </c:if>
 </div>
 <br>

@@ -16,24 +16,34 @@
            style="width:auto;height:200px"
       >
 </div>
+<div class="w3-container w3-black w3-right-align padding" style="padding-top:10px">
+    <h1 style="margin-right:60px">Login</h1>
+</div>
 <form 
     action="http://localhost:8080/CyberFlix_NRA/CyberFlixLoginServlet" 
     method="post" 
     class="w3-container, w3-display-middle" 
-    style="max-width:500px; margin-top: 80px;"
+    style="max-width:500px; margin-top: 120px;"
     >
     
-        <!-- START USER-SELECT -->
-	  	<input type="radio" name="user_type" value="new"> Create an Account<br>
-	  	<input type="radio" name="user_type" value="existing" checked> Current Customer<br>
-        <!-- END USER-SELECT -->
+    <!-- START USER-SELECT -->
+          <input class="w3-radio" type="radio" name="user_type" value="new"> 
+            <label class="w3-text-white"><b>Create an Account</b></label><br>
+          <input class="w3-radio" type="radio" name="user_type" value="existing" checked> 
+            <label class="w3-text-white"><b>Current Customer</b></label><br>
+       <!-- END USER-SELECT -->
+        <br><h3 class="w3-text-white"><b>E-mail Address</b></h3>
+        <input class="w3-input w3-border" 
+            type="email" 
+            name="email_address" required>
         
-        <br><label class="w3-text-red"><b>E-mail Address</b></label>
-        <input class="w3-input w3-border" type="email" name="email_address" required>
-        <label class="w3-text-red"><b>Password</b></label>
-        <input class="w3-input w3-border" type="password" name="password" required>
-        <button class="w3-btn w3-blue" type="submit" 
-            value ="Submit" style="margin:14px">Login</button>
+        <h3 class="w3-text-white"><b>Password</b></h3>
+        <input class="w3-input w3-border" 
+            type="password" 
+            name="password" required>
+        <button class="w3-btn w3-red w3-round-large" type="submit" 
+            value ="Submit" 
+            style="margin-top:20px; margin-left:65px">Login</button>
 </form>
 </body>
 </html>

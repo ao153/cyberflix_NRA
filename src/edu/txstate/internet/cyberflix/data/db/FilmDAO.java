@@ -42,6 +42,25 @@ public class FilmDAO extends DAO {
 		}
 		return films;
 	}
+	
+	public Film findFilmByID(int filmID) {
+		String selectString = "SELECT film.film_id, film.title, film.description, film.length, film.rating, film.release_year "
+				+ "FROM film" + " WHERE" + " film_id = " + filmID;
+		List<Film> films = null;
+		Connection dbConnection = null;
+		try {
+			dbConnection = DAO.getDBConnection();
+			Statement statement = dbConnection.createStatement();
+			ResultSet results = statement.executeQuery(selectString);
+			films = buildResults(results);
+			dbConnection.close();
+		} catch (SQLException e) {
+			System.err.println("FilmDAO.findFilmByID: " + e.toString());
+			LOGGER.severe(e.toString());
+			closeQuietly(dbConnection);
+		}
+		return films.get(0);
+	}
 
 	public List<Film> findFilmsByAttributes(String title, String description, int length, FilmRating rating) {
 		String selectString = buildString(title, description, length, rating);

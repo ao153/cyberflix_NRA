@@ -30,6 +30,7 @@ public class DataSource {
 	public static void addFilmToCart(String key, Film film) {
 		CartManager.getInstance().getCart(key).addFilm(film);
 	}
+	
 	public static Cart getCart(String key) {
 		return CartManager.getInstance().getCart(key);
 	}
@@ -44,6 +45,10 @@ public class DataSource {
 	
 	public static Customer getUser() {
 		return UserManager.getInstance().getUser();
+	}
+	
+	public static Film findFilmByID(int filmID) {
+		return new FilmDAO().findFilmByID(filmID);
 	}
 	
 	public static Film findFilmByTitle (String title) {
@@ -77,6 +82,10 @@ public class DataSource {
 	
 	public static void saveNewRental(RentalRecord record) {
 		new RentalDAO().save(record);
+	}
+	
+	public static List<RentalRecord> findRentalByCustomer(Customer customer) {
+		return new RentalDAO().findRentalByCustomer(customer);
 	}
 	
 	public static List<Actor> findActorsInFilm(Film film) {
