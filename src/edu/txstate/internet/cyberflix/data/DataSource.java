@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import edu.txstate.internet.Cart;
 import edu.txstate.internet.CartManager;
+import edu.txstate.internet.StaffManager;
 import edu.txstate.internet.UserManager;
 import edu.txstate.internet.cyberflix.data.actor.Actor;
 import edu.txstate.internet.cyberflix.data.customer.Customer;
@@ -13,16 +14,27 @@ import edu.txstate.internet.cyberflix.data.customer.RentalRecord;
 import edu.txstate.internet.cyberflix.data.db.CustomerDAO;
 import edu.txstate.internet.cyberflix.data.db.FilmDAO;
 import edu.txstate.internet.cyberflix.data.db.RentalDAO;
+import edu.txstate.internet.cyberflix.data.db.StaffDAO;
 import edu.txstate.internet.cyberflix.data.film.Film;
 import edu.txstate.internet.cyberflix.data.film.Film.FilmRating;
 import edu.txstate.internet.cyberflix.data.film.FilmCategory;
+import edu.txstate.internet.cyberflix.data.staff.Staff;
 
 public class DataSource {	
 	public static void init() {
 		CartManager cartSystem = CartManager.getInstance();
 		UserManager userSystem = UserManager.getInstance();
+		StaffManager staffSystem = StaffManager.getInstance();
 	}
 	
+    public static Staff findStaffByEmail(String emailAddress) {
+        return new StaffDAO().findStaffByEmail(emailAddress);
+    }
+    /*
+    public static void logInAs(Staff staff) {
+        StaffManager.getInstance().logInAs(staff);
+    }
+	*/
 	public static void createCartAt(String key) {
 		CartManager.getInstance().newCartAt(key);
 	}
@@ -44,7 +56,12 @@ public class DataSource {
 	}
 	
 	public static Customer getUser() {
-		return UserManager.getInstance().getUser();
+		if (UserManager.getInstance().getUser() != null)
+			return UserManager.getInstance().getUser();
+		else if (StaffManager.getInstance().getUser() != null)
+			return (Customer) StaffManager.getInstance().getUser();
+		else
+			return null;
 	}
 	
 	public static Customer findCustomerByID(int userID) {

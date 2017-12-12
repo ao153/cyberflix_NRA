@@ -56,6 +56,7 @@ crossorigin="anonymous"></script>
     <h4 style="color:red;">${DataSource.getUser().getFirstName()}</h4>
   </c:if>
 <!-- END LOGIN CODE -->
+
 <div class="center card w3-card-4 w3-section">
     <header class="w3-container color1">
     <h1 class = "w3-text-white" style = "text-shadow: 1px 0px 0 #444">Search</h1>
@@ -137,7 +138,18 @@ $("button.cart").click(function() {
         success : function(response){},
         error : function(jqXHR, exception){}
    });
-})
+  $(this).css("backgroundColor", "gray");
+});
 </script>
+<!-- STAFF LOGIN CODE -->
+  <c:if test = "${DataSource.getUser().getFirstName().equals('Guest')}">
+    <a style="margin-left: 46%; color:red;" href="StaffLogin.jsp" target="_blank">STAFF LOGIN</a>
+  </c:if>
+<!-- END STAFF LOGIN CODE -->
+<!--  VIEW RENTAL CODE -->
+  <c:if test = "${DataSource.getUser().getFirstName().equals('Mike')}">
+    <a style="margin-left: 46%; color:red;" href="viewRentals.jsp" target="_blank">VIEW RENTALS</a>
+  </c:if>
+<!-- END VIEW RENTAL CODE -->
 </body>
 </html>

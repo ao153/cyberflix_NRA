@@ -39,14 +39,6 @@ public class CyberFlixCartServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Cart myCart = DataSource.getCart(session);
 		
-		/*
-		for (Film film : myCart.getCartFilms()) {
-			int userID = DataSource.getUser().getId();
-			RentalRecord newRecord = new RentalRecord(0, null, film.getFilmID(), userID, null);	
-			DataSource.saveNewRental(newRecord);
-		}
-		*/
-		
 		// pass the list of films that matched the search query
 		request.setAttribute("films", myCart.getCartFilms());
 

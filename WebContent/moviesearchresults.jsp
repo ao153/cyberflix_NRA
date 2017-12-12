@@ -83,7 +83,8 @@ $("button.srCart").click(function() {
         success : function(response){},
         error : function(jqXHR, exception){}
    });
-})
+  $(this).css("backgroundColor", "gray");
+});
 </script>
 </body>
 </html>

@@ -40,6 +40,8 @@ public class CyberFlixLoginServlet extends HttpServlet {
 		String email = request.getParameter("email_address");
 		String password = request.getParameter("password");
 		String userType = request.getParameter("user_type");
+		String firstName = request.getParameter("first_name");
+		String lastName = request.getParameter("last_name");
 		System.out.println(userType);
 		
 		if (userType.equals("existing")) {
@@ -62,14 +64,19 @@ public class CyberFlixLoginServlet extends HttpServlet {
 				}	
 			}
 		} else if (userType.equals("new")) {
-			System.out.println("new user creation stub");
-			
 			// create customer object
 			Customer newCustomer = new Customer();
 			newCustomer.setEmailAddress(email);
 			newCustomer.setPassword(password);
-			newCustomer.setFirstName("New");
-			newCustomer.setLastName("User");
+			if (firstName.isEmpty()) 
+				newCustomer.setFirstName("New");	
+			else 
+				newCustomer.setFirstName(firstName);
+			if (lastName.isEmpty()) 
+				newCustomer.setLastName("User");	
+			else 
+				newCustomer.setLastName(lastName);
+			
 			
 			// save to DB
 			DataSource.saveNewCustomer(newCustomer);

@@ -7,6 +7,10 @@
 <title>Login to CyberFlix</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="http://localhost:8080/CyberFlix_NRA/stylesheet.css">
+<script
+src="https://code.jquery.com/jquery-3.2.1.min.js"
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container w3-black">      
@@ -25,12 +29,34 @@
     class="w3-container, w3-display-middle" 
     style="max-width:500px; margin-top: 120px;"
     >
-    
     <!-- START USER-SELECT -->
-          <input class="w3-radio" type="radio" name="user_type" value="new"> 
-            <label class="w3-text-white"><b>Create an Account</b></label><br>
-          <input class="w3-radio" type="radio" name="user_type" value="existing" checked> 
-            <label class="w3-text-white"><b>Current Customer</b></label><br>
+        <!-- RADIO BUTTON -->
+        <input class="w3-radio user-select" style="margin-top: 20px;" type="radio" name="user_type" value="new"> 
+          <label class="w3-text-white"><b>Create an Account</b></label><br>
+        <input class="w3-radio user-select" type="radio" name="user_type" value="existing" checked> 
+          <label class="w3-text-white"><b>Current Customer</b></label><br>
+        <!-- INPUT FIELDS -->  
+        <div class="newUserDiv" style="display:none;">
+        <br><h3 class="w3-text-white"><b>First Name</b></h3>
+        <input class="w3-input w3-border" 
+            type="text" 
+            name="first_name">
+        <h3 class="w3-text-white"><b>Last Name</b></h3>
+        <input class="w3-input w3-border" 
+            type="text" 
+            name="last_name">
+        </div>
+        <!-- JAVASCRIPT BELOW-->
+        <script>
+        $("input.user-select").click(function() {
+        		if ($(this).attr("value") == "new") {
+        			$("div.newUserDiv").css("display", "block");
+        			
+        		} else {
+        			$("div.newUserDiv").css("display", "none");
+        		}
+        });
+        </script>
        <!-- END USER-SELECT -->
         <br><h3 class="w3-text-white"><b>E-mail Address</b></h3>
         <input class="w3-input w3-border" 
