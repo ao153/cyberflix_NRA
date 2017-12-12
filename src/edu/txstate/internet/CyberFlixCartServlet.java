@@ -1,6 +1,8 @@
 package edu.txstate.internet;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import edu.txstate.internet.cyberflix.data.DataSource;
+import edu.txstate.internet.cyberflix.data.customer.RentalRecord;
 import edu.txstate.internet.cyberflix.data.film.Film;
 
 /**
@@ -34,12 +37,18 @@ public class CyberFlixCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sessionID = request.getSession().getId();
 		HttpSession session = request.getSession();
-		//Cart myCart = DataSource.getCart(sessionID);
 		Cart myCart = DataSource.getCart(session);
+		ArrayList<RentalRecord> rentalRecords = new ArrayList<>();
 		
-		response.getWriter().append("Cart Page: ");
+		//response.getWriter().append("Cart Page: ");
 		for (Film film : myCart.getCartFilms()) {
-			response.getWriter().append(film.getTitle() + " ");
+			//response.getWriter().append(film.getTitle() + " ");
+			int userID = DataSource.getUser().getId();
+			RentalRecord newRecord = new RentalRecord(0, null, film.getFilmID(), userID, null);
+			
+			
+			DataSource.saveNewRental(newRecord);
+			rentalRecords.add(newRecord);
 		}
 		
 		// pass the list of films that matched the search query
@@ -48,6 +57,10 @@ public class CyberFlixCartServlet extends HttpServlet {
 		// forward this request to the following jsp page
 		request.getRequestDispatcher("shoppingcart.jsp").
 		    forward(request,  response);
+		
+		for (RentalRecord record : rentalRecords) {
+			System.out.println("RECORD - FILM ID: " + record.getFilmID());
+		}
 		
 	}
 

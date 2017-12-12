@@ -9,8 +9,10 @@ import edu.txstate.internet.CartManager;
 import edu.txstate.internet.UserManager;
 import edu.txstate.internet.cyberflix.data.actor.Actor;
 import edu.txstate.internet.cyberflix.data.customer.Customer;
+import edu.txstate.internet.cyberflix.data.customer.RentalRecord;
 import edu.txstate.internet.cyberflix.data.db.CustomerDAO;
 import edu.txstate.internet.cyberflix.data.db.FilmDAO;
+import edu.txstate.internet.cyberflix.data.db.RentalDAO;
 import edu.txstate.internet.cyberflix.data.film.Film;
 import edu.txstate.internet.cyberflix.data.film.Film.FilmRating;
 import edu.txstate.internet.cyberflix.data.film.FilmCategory;
@@ -71,6 +73,10 @@ public class DataSource {
 	
 	public static void saveNewCustomer(Customer customer) {
 		new CustomerDAO().save(customer);
+	}
+	
+	public static void saveNewRental(RentalRecord record) {
+		new RentalDAO().save(record);
 	}
 	
 	public static List<Actor> findActorsInFilm(Film film) {

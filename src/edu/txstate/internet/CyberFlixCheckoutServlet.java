@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.txstate.internet.cyberflix.data.DataSource;
+import edu.txstate.internet.cyberflix.data.customer.RentalRecord;
 
 /**
  * Servlet implementation class CyberFlixCheckoutServlet
@@ -38,6 +39,12 @@ public class CyberFlixCheckoutServlet extends HttpServlet {
 		request.setAttribute("first_name", firstName);
 		request.setAttribute("customer_name", customerName);
 		request.setAttribute("customer_email", customerEmail);
+		
+		// DEBUGGING RENTALRECORDS HERE
+		
+		//RentalRecord myRecord = new RentalRecord(0, null, 0, 0, null);
+		
+		// END RENTALRECORDS DEBUGGING
 		
 		// forward this request to the following jsp page
 		request.getRequestDispatcher("checkout.jsp").
