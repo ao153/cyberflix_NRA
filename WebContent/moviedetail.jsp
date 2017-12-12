@@ -15,6 +15,10 @@ crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="w3-container w3-black w3-left-align padding" style = "padding-top:10px;padding-left:30px;">
+<img class = "logo"
+     src = "http://localhost:8080/CyberFlix_NRA/images/logo.jpg"
+     alt = "logo"
+     >
 <h1><b>  Movie Details </b></h1>
 <h4> Here is the movie you selected </h4>
 <!-- shopping cart icon -->
@@ -24,6 +28,17 @@ crossorigin="anonymous"></script>
 <p class = "w3-left-align detailCartStuff"> <a id="cartLink" href="CyberFlixCartServlet" class ="dCS2">Shopping Cart
 <i class="material-icons" style="font-size:30px;vertical-align:middle;color:#B82601;">add_shopping_cart</i>
 </a>
+<!-- CHECKOUT BTN -->
+<br>
+<a href="CyberFlixCheckoutServlet">
+<button 
+	class="w3-button w3-large w3-round-large checkoutBtn w3-left-align w3-teal" 
+	value="checkout"
+>	
+	Click to Checkout
+</button>
+</a>
+<!-- END CHECKOUT BTN -->
 </p>
 </c:if>
 <!-- end shopping cart icon -->

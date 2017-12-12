@@ -72,7 +72,7 @@ i = 0;
 <br> 
 </c:forEach>
 
-<!-- CHECKOUT BTN HERE - TAKES YOU TO A NEW PAGE THAT SHOWS A TOTAL PER DAY ($1 x # OF FILMS IN CART) -->
+<!-- CHECKOUT BTN -->
 <a href="CyberFlixCheckoutServlet?film_count=${requestScope.films.size()}">
 <button 
 	class="w3-button w3-large w3-round-large checkoutBtn w3-block w3-teal" 
@@ -81,6 +81,6 @@ i = 0;
 	Click to Checkout
 </button>
 </a>
-<!-- BUTTON STUFF ABOVE -->
+<!-- END CHECKOUT BTN -->
 </body>
 </html>

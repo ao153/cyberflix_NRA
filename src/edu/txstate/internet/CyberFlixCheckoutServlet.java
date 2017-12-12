@@ -35,7 +35,11 @@ public class CyberFlixCheckoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String filmCount = request.getParameter("film_count");
+		HttpSession session = request.getSession();
+		//String filmCount = request.getParameter("film_count");
+		int filmCount = DataSource.getCart(session).getSize();
+		//System.out.println("cart size" + DataSource.getCart(session).getSize());
+		
 		Customer myUser = DataSource.getUser();
 		String firstName = myUser.getFirstName();
 		String customerName = myUser.getFirstName()
