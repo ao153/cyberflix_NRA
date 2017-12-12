@@ -148,7 +148,7 @@ $("button.cart").click(function() {
 <!-- END STAFF LOGIN CODE -->
 <!--  VIEW RENTAL CODE -->
   <c:if test = "${DataSource.getUser().getFirstName().equals('Mike')}">
-    <a style="margin-left: 46%; color:red;" href="viewRentals.jsp" target="_blank">VIEW RENTALS</a>
+    <a style="margin-left: 46%; color:red;" href="ViewRentalsServlet">VIEW RENTALS</a>
   </c:if>
 <!-- END VIEW RENTAL CODE -->
 </body>

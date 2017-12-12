@@ -58,7 +58,7 @@ public class CustomerDAO extends DAO {
 	public Customer findCustomerByID(int userID) {
 		final String CUSTOMER_SELECT = "SELECT * FROM customer ";
 		final String ID_CLAUSE = "WHERE customer_id = ";
-		final String selectString = CUSTOMER_SELECT + ID_CLAUSE + '"' + userID + '"'; 
+		final String selectString = CUSTOMER_SELECT + ID_CLAUSE + '"' + new Integer(userID).toString() + '"'; 
 		
 		List<Customer> customers = new ArrayList<>();
 		Connection dbConnection = null;
